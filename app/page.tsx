@@ -3,12 +3,11 @@ import Hello from "./components/Hello";
 
 const Home = () => {
   return (
-    <>
-      <div className="text-5xl underline">{`Welcome to Paradise`}</div>
-      <br />
-
-      <Hello />
-    </>
+    <section>
+      <h1 className="text-center">
+        And you shall see me as the rightus deliverer <br /> of good and evil
+      </h1>
+    </section>
   );
 };
 

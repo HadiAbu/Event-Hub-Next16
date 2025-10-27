@@ -16,7 +16,7 @@ const martianMono = Martian_Mono({
 
 export const metadata: Metadata = {
   title: "Event Hub Planner",
-  description: "Demo project for Event Hub Planner",
+  description: "Project for Event Hub Planner",
 };
 
 export default function RootLayout({
@@ -41,8 +41,8 @@ export default function RootLayout({
             noiseAmount={0.0}
             distortion={0.01}
           />
-          <main>{children}</main>
         </div>
+        <main>{children}</main>
       </body>
     </html>
   );
