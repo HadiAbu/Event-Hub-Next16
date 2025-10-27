@@ -9,6 +9,18 @@ const Home = () => {
       </h1>
       <p className="text-center mt-5">The power of christ compels you!</p>
       <ExploreBtn />
+
+      <div className="mt-20 space-y-7">
+        <h3>Upcoming Events</h3>
+
+        <ul className="event">
+          {[1, 2, 3, 4, 5].map((event) => (
+            <li key={event} className="event-card">
+              {`Event ${event}`}
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 };
