@@ -1,15 +1,18 @@
 import Image from "next/image";
 
-("use client");
-
 const ExploreBtn = () => {
+  ("use client");
   const handleClick = () => {
     console.log("Explore button clicked");
   };
   return (
-    <button onClick={handleClick}>
-      Explore
-      <a href="#events" className="mt-5">
+    <button
+      id="explore-btn"
+      type="button"
+      className="mt-5 mx-auto"
+      onClick={handleClick}
+    >
+      <a href="#events" className="">
         Explore Events
         <Image
           src="/icons/arrow-down.svg"

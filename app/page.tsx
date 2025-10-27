@@ -1,5 +1,5 @@
-import React from "react";
-import Hello from "./components/Hello";
+"use client";
+import ExploreBtn from "./components/ExploreBtn";
 
 const Home = () => {
   return (
@@ -8,6 +8,7 @@ const Home = () => {
         And you shall see me as the rightus deliverer <br /> of good and evil
       </h1>
       <p className="text-center mt-5">The power of christ compels you!</p>
+      <ExploreBtn />
     </section>
   );
 };
