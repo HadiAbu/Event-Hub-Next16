@@ -3,6 +3,7 @@ import { Schibsted_Grotesk, Martian_Mono } from "next/font/google";
 // import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import LightRays from "./components/LightRays";
+import Navbar from "./components/Navbar";
 
 const schibstedGrotesk = Schibsted_Grotesk({
   variable: "--font-schibsted-grotesk",
@@ -42,6 +43,7 @@ export default function RootLayout({
             distortion={0.01}
           />
         </div>
+        <Navbar />
         <main>{children}</main>
       </body>
     </html>
