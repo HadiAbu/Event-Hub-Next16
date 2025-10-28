@@ -172,22 +172,22 @@
   }
 
   #event-card {
-    @apply flex flex-col gap-3;
+    @apply flex flex-col gap-3 py-1;
 
     .poster {
       @apply h-[300px] w-full rounded-lg object-cover;
     }
 
     .title {
-      @apply text-[20px] font-semibold line-clamp-1;
+      @apply text-[20px] font-semibold line-clamp-1 p-1;
     }
 
     p {
-      @apply text-light-200 text-sm font-light;
+      @apply text-light-200 text-sm font-light p-1;
     }
 
     .datetime {
-      @apply text-light-200 flex flex-row flex-wrap items-center gap-4;
+      @apply text-light-200 flex flex-row flex-wrap items-center gap-4 mx-1;
 
       div {
         @apply flex flex-row gap-2;
