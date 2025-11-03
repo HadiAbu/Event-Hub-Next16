@@ -44,20 +44,22 @@ npm run dev
 Connect once at application start (API routes, server-side handlers):
 
 ```ts
-import { connectToDatabase } from '@/lib/mongodb';
-import { Event, Booking } from '@/database';
+import { connectToDatabase } from "@/lib/mongodb";
+import { Event, Booking } from "@/database";
 
 await connectToDatabase();
 // Use Event and Booking models normally (create/find/etc.)
 ```
 
 Event model highlights:
+
 - Required fields validated in a pre-save hook.
 - Slug automatically generated from `title` and only updates when the title changes.
 - `time` is normalized to an ISO string in the pre-save hook.
 - `slug` has a unique index and timestamps are enabled.
 
 Booking model highlights:
+
 - Stores `eventId` (ObjectId ref to `Event`) and `email`.
 - Pre-save hook verifies the referenced `Event` exists and validates email format.
 - Index on `eventId` for faster lookups and timestamps enabled.
@@ -68,21 +70,21 @@ Booking model highlights:
 await connectToDatabase();
 
 const e = await Event.create({
-  title: 'My Event',
-  description: 'Details',
-  overview: 'Short overview',
-  image: '/img.jpg',
-  venue: 'Main Hall',
-  location: 'City',
-  time: '2025-11-03T19:00:00',
-  mode: 'offline',
-  audience: 'Developers',
-  organizer: 'Team',
-  agenda: 'Talks',
-  tags: ['tech', 'community']
+  title: "My Event",
+  description: "Details",
+  overview: "Short overview",
+  image: "/img.jpg",
+  venue: "Main Hall",
+  location: "City",
+  time: "2025-11-03T19:00:00",
+  mode: "offline",
+  audience: "Developers",
+  organizer: "Team",
+  agenda: "Talks",
+  tags: ["tech", "community"],
 });
 
-const b = await Booking.create({ eventId: e._id, email: 'user@example.com' });
+const b = await Booking.create({ eventId: e._id, email: "user@example.com" });
 ```
 
 ## Type-checking and linting
