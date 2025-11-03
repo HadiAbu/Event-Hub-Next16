@@ -24,12 +24,6 @@ Create a `.env.local` in the project root (gitignored) and set:
 
 - `MONGODB_URI` — MongoDB connection string (e.g. mongodb+srv://...)
 
-Example:
-
-```
-MONGODB_URI="mongodb+srv://user:pass@cluster.example.mongodb.net/event-hub?retryWrites=true&w=majority"
-```
-
 ## Setup
 
 Install dependencies and run the dev server:
