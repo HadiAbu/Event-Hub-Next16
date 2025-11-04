@@ -38,3 +38,19 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     );
   }
 }
+export async function GET(): Promise<NextResponse> {
+  try {
+    await connectDB();
+    const events = await Event.find().sort({ createdAt: -1 });
+
+    return NextResponse.json({ events }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: "Internal Server Error",
+        error: error instanceof Error ? error.message : String(error),
+      },
+      { status: 500 }
+    );
+  }
+}

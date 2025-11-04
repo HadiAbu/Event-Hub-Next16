@@ -1,9 +1,13 @@
-"use client";
+import { EventDocument } from "@/database";
 import EventCard from "./components/EventCard";
 import ExploreBtn from "./components/ExploreBtn";
-import events from "@/lib/constants";
 
-const Home = () => {
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+const Page = async () => {
+  const response = await fetch(`${BASE_URL}/api/events`);
+  const { events } = await response.json();
+
   return (
     <section>
       <h1 className="text-center">
@@ -18,7 +22,7 @@ const Home = () => {
         <ul className="event grid" id="events">
           {events &&
             events.length > 0 &&
-            events.map((event) => (
+            events.map((event: EventDocument) => (
               <li key={event.title} className="list-none">
                 <EventCard {...event} />
               </li>
@@ -29,4 +33,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Page;

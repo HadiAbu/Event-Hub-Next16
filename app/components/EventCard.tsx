@@ -4,12 +4,24 @@ import Link from "next/link";
 interface EventCardProps {
   image: string;
   title: string;
+  description: string;
   location: string;
-  date: string;
+  agenda: string;
   time: string;
+  mode: string;
+  venue: string;
 }
 
-const EventCard = ({ image, title, location, date, time }: EventCardProps) => {
+const EventCard = ({
+  image,
+  title,
+  location,
+  description,
+  agenda,
+  mode,
+  venue,
+  time,
+}: EventCardProps) => {
   return (
     <div>
       <Link href={`/events`} id="event-card">
@@ -36,7 +48,9 @@ const EventCard = ({ image, title, location, date, time }: EventCardProps) => {
                 width={14}
                 height={14}
               />
-              <p>{date}</p>
+              <p>{agenda}</p>
+              <p>{venue}</p>
+              <p>{mode}</p>
             </div>
             <div>
               <Image src="/icons/clock.svg" alt="time" width={14} height={14} />
