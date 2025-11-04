@@ -4,7 +4,6 @@ import Event from "@/database/event.model";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
-    console.log("connect to db");
     await connectDB();
     const formData = await req.formData();
 
