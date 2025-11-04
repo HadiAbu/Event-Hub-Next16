@@ -38,13 +38,53 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     );
   }
 }
-export async function GET(): Promise<NextResponse> {
+export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
     await connectDB();
-    const events = await Event.find().sort({ createdAt: -1 });
 
-    return NextResponse.json({ events }, { status: 200 });
+    // Parse pagination query params with sensible defaults and caps
+    const url = req.nextUrl;
+    const params = url.searchParams;
+    const pageParam = params.get("page");
+    const limitParam = params.get("limit");
+
+    const DEFAULT_PAGE = 1;
+    const DEFAULT_LIMIT = 20;
+    const MAX_LIMIT = 100;
+
+    let page = Number(pageParam ?? DEFAULT_PAGE);
+    let limit = Number(limitParam ?? DEFAULT_LIMIT);
+
+    // Coerce and sanitize
+    if (!Number.isFinite(page) || page < 1) page = DEFAULT_PAGE;
+    if (!Number.isFinite(limit) || limit < 1) limit = DEFAULT_LIMIT;
+    if (limit > MAX_LIMIT) limit = MAX_LIMIT;
+
+    const skip = (page - 1) * limit;
+
+    // Use paginated query to avoid loading whole collection into memory
+    const [total, events] = await Promise.all([
+      Event.countDocuments(),
+      Event.find().sort({ createdAt: -1 }).skip(skip).limit(limit),
+    ]);
+
+    const totalPages = Math.max(1, Math.ceil(total / limit));
+
+    return NextResponse.json(
+      {
+        events,
+        pagination: {
+          total,
+          page,
+          limit,
+          totalPages,
+        },
+      },
+      { status: 200 }
+    );
   } catch (error) {
+    // Log error consistently as done in POST handler
+    console.error("Error handling GET /api/events:", error);
     return NextResponse.json(
       {
         message: "Internal Server Error",

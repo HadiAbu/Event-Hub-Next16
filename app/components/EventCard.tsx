@@ -48,9 +48,15 @@ const EventCard = ({
                 width={14}
                 height={14}
               />
-              <p>{agenda}</p>
-              <p>{venue}</p>
-              <p>{mode}</p>
+              <p>
+                <span className="font-semibold">Agenda:</span> {agenda}
+              </p>
+              <p>
+                <span className="font-semibold">Venue:</span> {venue}
+              </p>
+              <p>
+                <span className="font-semibold">Mode:</span> {mode}
+              </p>
             </div>
             <div>
               <Image src="/icons/clock.svg" alt="time" width={14} height={14} />

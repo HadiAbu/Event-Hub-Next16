@@ -1,3 +1,4 @@
+// ("use client");
 import { EventDocument } from "@/database";
 import EventCard from "./components/EventCard";
 import ExploreBtn from "./components/ExploreBtn";
@@ -5,15 +6,49 @@ import ExploreBtn from "./components/ExploreBtn";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const Page = async () => {
-  const response = await fetch(`${BASE_URL}/api/events`);
-  const { events } = await response.json();
+  if (!BASE_URL) {
+    throw new Error(
+      "NEXT_PUBLIC_BASE_URL is not defined. Set NEXT_PUBLIC_BASE_URL in your environment."
+    );
+  }
+
+  let events: EventDocument[] = [];
+
+  try {
+    const res = await fetch(`${BASE_URL}/api/events`, {
+      // Enable ISR-style revalidation for this fetch
+      next: { revalidate: 60 },
+    });
+
+    if (!res.ok) {
+      throw new Error(
+        `Failed to fetch events: ${res.status} ${res.statusText}`
+      );
+    }
+
+    const payload = await res.json();
+
+    if (!payload || !Array.isArray(payload.events)) {
+      throw new Error(
+        "Invalid response shape from /api/events; expected { events: [] }"
+      );
+    }
+
+    events = payload.events as EventDocument[];
+  } catch (err) {
+    // Throw so Next.js surfaces the error during SSR; alternative: render fallback UI
+    const message = err instanceof Error ? err.message : String(err);
+    throw new Error(`Error fetching events: ${message}`);
+  }
 
   return (
     <section>
       <h1 className="text-center">
-        And you shall see me as the rightus deliverer <br /> of good and evil
+        Welcome to <span className="text-primary">EventHub</span>
       </h1>
-      <p className="text-center mt-5">The power of christ compels you!</p>
+      <p className="text-center mt-5">
+        Discover and join amazing events around you!
+      </p>
       <ExploreBtn />
 
       <div className="mt-20 space-y-7">
