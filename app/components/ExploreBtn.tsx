@@ -1,10 +1,11 @@
+"use client";
 import Image from "next/image";
 
 const ExploreBtn = () => {
-  ("use client");
   const handleClick = () => {
     console.log("Explore button clicked");
   };
+
   return (
     <button
       id="explore-btn"

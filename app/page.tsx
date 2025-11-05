@@ -1,24 +1,22 @@
-// ("use client");
 import { EventDocument } from "@/database";
 import EventCard from "./components/EventCard";
 import ExploreBtn from "./components/ExploreBtn";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const INTERNAL_BASE_URL = process.env.INTERNAL_API_BASE_URL;
 
 const Page = async () => {
-  if (!BASE_URL) {
+  console.log(INTERNAL_BASE_URL);
+  if (!INTERNAL_BASE_URL) {
     throw new Error(
-      "NEXT_PUBLIC_BASE_URL is not defined. Set NEXT_PUBLIC_BASE_URL in your environment."
+      "INTERNAL_BASE_URL is not defined. Set INTERNAL_BASE_URL in your environment."
     );
   }
 
   let events: EventDocument[] = [];
 
   try {
-    const res = await fetch(`${BASE_URL}/api/events`, {
-      // Enable ISR-style revalidation for this fetch
-      next: { revalidate: 60 },
-    });
+    const res = await fetch(`${INTERNAL_BASE_URL}/api/events`);
 
     if (!res.ok) {
       throw new Error(
