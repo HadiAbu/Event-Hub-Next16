@@ -20,7 +20,7 @@ development hot reloads).
 
 ## Environment
 
-Create a `.env.local` in the project root (gitignored) and set:
+Create a `.env` in the project root (gitignored) and set:
 
 - `MONGODB_URI` — MongoDB connection string (e.g. mongodb+srv://...)
 
