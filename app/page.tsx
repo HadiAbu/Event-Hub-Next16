@@ -6,7 +6,6 @@ import ExploreBtn from "./components/ExploreBtn";
 const INTERNAL_BASE_URL = process.env.INTERNAL_API_BASE_URL;
 
 const Page = async () => {
-  console.log(INTERNAL_BASE_URL);
   if (!INTERNAL_BASE_URL) {
     throw new Error(
       "INTERNAL_BASE_URL is not defined. Set INTERNAL_BASE_URL in your environment."
