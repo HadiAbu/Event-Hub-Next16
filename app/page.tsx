@@ -2,11 +2,11 @@ import { EventDocument } from "@/database";
 import EventCard from "./components/EventCard";
 import ExploreBtn from "./components/ExploreBtn";
 
-// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-const INTERNAL_BASE_URL = process.env.INTERNAL_API_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+// const INTERNAL_BASE_URL = process.env.INTERNAL_API_BASE_URL;
 
 const Page = async () => {
-  if (!INTERNAL_BASE_URL) {
+  if (!BASE_URL) {
     throw new Error(
       "INTERNAL_BASE_URL is not defined. Set INTERNAL_BASE_URL in your environment."
     );
@@ -15,7 +15,7 @@ const Page = async () => {
   let events: EventDocument[] = [];
 
   try {
-    const res = await fetch(`${INTERNAL_BASE_URL}/api/events`);
+    const res = await fetch(`${BASE_URL}/api/events`);
 
     if (!res.ok) {
       throw new Error(

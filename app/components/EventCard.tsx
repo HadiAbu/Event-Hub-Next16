@@ -6,6 +6,7 @@ interface EventCardProps {
   title: string;
   description: string;
   location: string;
+  slug: string;
   agenda: string;
   time: string;
   mode: string;
@@ -17,6 +18,7 @@ const EventCard = ({
   title,
   location,
   description,
+  slug,
   agenda,
   mode,
   venue,
@@ -24,7 +26,7 @@ const EventCard = ({
 }: EventCardProps) => {
   return (
     <div>
-      <Link href={`/events`} id="event-card">
+      <Link href={`/events/${slug}`} id="event-card">
         <div className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
           <Image
             src={image}
