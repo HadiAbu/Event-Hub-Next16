@@ -48,7 +48,7 @@ const EventSchema = new Schema<EventDocument, Model<EventDocument>>(
     },
     audience: { type: String, required: true, trim: true },
     organizer: { type: String, required: true, trim: true },
-    agenda: { type: [String], required: true, trim: true },
+    agenda: { type: [String], required: true, default: [] },
     tags: { type: [String], required: true, default: [] },
   },
   { timestamps: true, strict: true }
@@ -74,7 +74,6 @@ EventSchema.pre<EventDocument>("save", function (next) {
       "time",
       "audience",
       "organizer",
-      "agenda",
     ];
 
     for (const field of requiredStringFields) {

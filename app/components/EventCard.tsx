@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { capitalize, formatTime, formatDate } from "../../lib/utils";
 
 interface EventCardProps {
   image: string;
@@ -35,34 +36,32 @@ const EventCard = ({
             height={300}
             className="poster"
           />
-          <div className="flex flex-row gap-2 p-1">
+          <h1 className="title ml-2 mt-2">{capitalize(title)}</h1>
+          <div className="flex flex-row gap-2 p-1 ml-2">
             <Image src="/icons/pin.svg" alt="location" width={14} height={14} />
             <p>{location}</p>
           </div>
 
-          <p className="title">{title}</p>
-
-          <div className="datetime">
-            <div>
+          <div className="datetime mb-2">
+            <div className="ml-2">
               <Image
                 src="/icons/calendar.svg"
                 alt="date"
                 width={14}
                 height={14}
               />
+              <p>{formatDate(time)}</p>
               <p>
-                <span className="font-semibold">Agenda:</span> {agenda}
+                <span className="font-semibold">Venue:</span>{" "}
+                {capitalize(venue)}
               </p>
               <p>
-                <span className="font-semibold">Venue:</span> {venue}
-              </p>
-              <p>
-                <span className="font-semibold">Mode:</span> {mode}
+                <span className="font-semibold">Mode:</span> {capitalize(mode)}
               </p>
             </div>
             <div>
               <Image src="/icons/clock.svg" alt="time" width={14} height={14} />
-              <p>{time}</p>
+              <p>{formatTime(time)}</p>
             </div>
           </div>
         </div>
