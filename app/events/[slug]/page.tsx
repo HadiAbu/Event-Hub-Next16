@@ -9,6 +9,16 @@ type RouteParams = {
   }>;
 };
 
+const EventTags = ({ tagItems }: { tagItems: string[] }) => (
+  <div className="tags">
+    <h2>Tags</h2>
+    <ul className="">
+      {tagItems.map((item: string) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  </div>
+);
 const EventDetailsItem = ({
   icon,
   label,
@@ -72,14 +82,37 @@ const EventDetailsPage = async ({ params }: RouteParams) => {
               <h2>Event Details</h2>
               <EventDetailsItem
                 icon="/icons/calendar.svg"
-                label={"Date & Time: " + time}
+                label={"Date: " + time.toString().slice(0, 10)}
                 alt="calendar-icon"
               />
+              <EventDetailsItem
+                icon="/icons/audience.svg"
+                label={audience}
+                alt="audience-icon"
+              />
+              <EventDetailsItem
+                icon="/icons/clock.svg"
+                label={"Time: " + time.toString().slice(11, 16)}
+                alt="clock-icon"
+              />
+              <EventDetailsItem
+                icon="/icons/pin.svg"
+                label={venue + ", " + location}
+                alt="pin-icon"
+              />
+              <EventDetailsItem
+                icon="/icons/mode.svg"
+                label={mode}
+                alt="mode-icon"
+              />
             </section>
+            {tags && tags.length != 0 && (
+              <EventTags tagItems={JSON.parse(tags[0])} />
+            )}
           </div>
-          <div className="booking">
-            <aside className="text-lg semi-bold">Book Event</aside>
-          </div>
+          <aside className="booking">
+            <p className="text-lg semi-bold">Book Event</p>
+          </aside>
         </div>
       </div>
     </section>
