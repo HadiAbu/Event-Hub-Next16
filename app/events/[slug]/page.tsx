@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { EventDocument } from "@/database";
 import Image from "next/image";
+import BookEvent from "@/app/components/BookEvent";
 
 type RouteParams = {
   params: Promise<{
@@ -93,6 +94,9 @@ const EventDetailsPage = async ({ params }: RouteParams) => {
   if (!description) {
     return notFound();
   }
+
+  const bookings = 10;
+
   return (
     <section id="event">
       <div className="header">
@@ -151,7 +155,19 @@ const EventDetailsPage = async ({ params }: RouteParams) => {
             </div>
           </div>
           <aside className="booking">
-            <p className="text-lg semi-bold">Book Event</p>
+            <div className="signup-card">
+              <h2>Book your spot</h2>
+              {bookings > 0 ? (
+                <p className="text-lg semi-bold">
+                  Join people who have already booked their spot
+                </p>
+              ) : (
+                <p className="text-sm semi-bold">
+                  Be the first to book your spot
+                </p>
+              )}
+              <BookEvent />
+            </div>
           </aside>
         </div>
       </div>
