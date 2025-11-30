@@ -123,6 +123,10 @@ const EventDetailsPage = async ({ params }: RouteParams) => {
             {tags && tags.length != 0 && (
               <EventTags tagItems={JSON.parse(tags[0])} />
             )}
+            <div className="flex-col-gap-2">
+              <h2>Organizer</h2>
+              <p>{organizer}</p>
+            </div>
           </div>
           <aside className="booking">
             <p className="text-lg semi-bold">Book Event</p>
