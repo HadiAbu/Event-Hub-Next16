@@ -13,7 +13,7 @@ export interface EventDocument extends Document {
   mode: "offline" | "online" | "hybrid";
   audience: string;
   organizer: string;
-  agenda: string;
+  agenda: string[];
   tags: string[];
   createdAt: Date;
   updatedAt: Date;
@@ -48,7 +48,7 @@ const EventSchema = new Schema<EventDocument, Model<EventDocument>>(
     },
     audience: { type: String, required: true, trim: true },
     organizer: { type: String, required: true, trim: true },
-    agenda: { type: String, required: true, trim: true },
+    agenda: { type: [String], required: true, trim: true },
     tags: { type: [String], required: true, default: [] },
   },
   { timestamps: true, strict: true }

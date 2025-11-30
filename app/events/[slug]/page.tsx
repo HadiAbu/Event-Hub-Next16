@@ -9,6 +9,17 @@ type RouteParams = {
   }>;
 };
 
+const EventAgenda = ({ agendaItems }: { agendaItems: string[] }) => (
+  <div className="agenda">
+    <h2>Agenda</h2>
+    <ul>
+      {agendaItems.map((item: string) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  </div>
+);
+
 const EventTags = ({ tagItems }: { tagItems: string[] }) => (
   <div className="tags">
     <h2>Tags</h2>
@@ -106,6 +117,9 @@ const EventDetailsPage = async ({ params }: RouteParams) => {
                 alt="mode-icon"
               />
             </section>
+            {agenda && agenda.length != 0 && (
+              <EventAgenda agendaItems={JSON.parse(agenda[0])} />
+            )}
             {tags && tags.length != 0 && (
               <EventTags tagItems={JSON.parse(tags[0])} />
             )}

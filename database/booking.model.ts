@@ -24,7 +24,7 @@ const BookingSchema = new Schema<BookingDocument, Model<BookingDocument>>(
 // - fast lookups by eventId and recent bookings
 // - non-unique index on email for lookup performance (allows same email across events)
 // - compound unique index on { eventId, email } to prevent duplicate bookings for the same event
-BookingSchema.index({ eventId: 1 });
+// BookingSchema.index({ eventId: 1 });
 BookingSchema.index({ eventId: 1, createdAt: -1 });
 BookingSchema.index({ email: 1 }); // non-unique: allow same email to book different events
 BookingSchema.index(
