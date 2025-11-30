@@ -51,24 +51,46 @@ const EventDetailsItem = ({
 // const EventDetailsPage = async ({params}:{params: Promise<{slug: string}>}) => {
 const EventDetailsPage = async ({ params }: RouteParams) => {
   const { slug } = await params; // slug must be awaited
-  const request = await fetch(`${BASE_URL}/api/events/${slug}`);
-  const event = await request.json();
+
+  let event;
+  try {
+    const request = await fetch(`${BASE_URL}/api/events/${slug}`, {
+      next: { revalidate: 60 },
+    });
+
+    if (!request.ok) {
+      if (request.status === 404) {
+        return notFound();
+      }
+      throw new Error(`Failed to fetch event: ${request.statusText}`);
+    }
+
+    const response = await request.json();
+    event = response.event;
+
+    if (!event) {
+      return notFound();
+    }
+  } catch (error) {
+    console.error("Error fetching event:", error);
+    return notFound();
+  }
+  //descructure event object
   const {
-    event: {
-      description,
-      image,
-      overview,
-      location,
-      time,
-      venue,
-      mode,
-      audience,
-      organizer,
-      agenda,
-      tags,
-    },
+    description,
+    image,
+    overview,
+    location,
+    time,
+    venue,
+    mode,
+    audience,
+    organizer,
+    agenda,
+    tags,
   } = event;
-  if (!event) {
+
+  if (!description) {
     return notFound();
   }
   return (
