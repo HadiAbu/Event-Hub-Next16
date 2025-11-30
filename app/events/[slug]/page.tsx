@@ -19,7 +19,7 @@ const EventDetailsItem = ({
   alt: string;
 }) => {
   return (
-    <div className="flex-row-gap-2 items-center">
+    <div className="flex-row-gap-2">
       <Image src={icon} alt={alt} width={17} height={17} />
       <span>{label}</span>
     </div>
@@ -51,36 +51,38 @@ const EventDetailsPage = async ({ params }: RouteParams) => {
     return notFound();
   }
   return (
-    <div className="header">
-      <h1>{`${slug}`}</h1>
-      <p>{` ${description}`}</p>
-      <div className="details">
-        <div className="content">
-          <img
-            src={image}
-            alt="event-image"
-            width={800}
-            height={800}
-            className="banner"
-          />
-          <section className="flex-col-gap-2">
-            <h2>Overview</h2>
-            <p>{overview}</p>
-          </section>
-          <section className="flex-col-gap-2">
-            <h2>Event Details</h2>
-            <EventDetailsItem
-              icon="/icons/calendar.svg"
-              label={"Date & Time: " + time}
-              alt="calendar-icon"
+    <section id="event">
+      <div className="header">
+        <h1>{`${slug}`}</h1>
+        <p>{` ${description}`}</p>
+        <div className="details">
+          <div className="content">
+            <img
+              src={image}
+              alt="event-image"
+              width={800}
+              height={800}
+              className="banner"
             />
-          </section>
-        </div>
-        <div className="booking">
-          <aside className="text-lg semi-bold">Book Event</aside>
+            <section className="flex-col-gap-2">
+              <h2>Overview</h2>
+              <p>{overview}</p>
+            </section>
+            <section className="flex-col-gap-2">
+              <h2>Event Details</h2>
+              <EventDetailsItem
+                icon="/icons/calendar.svg"
+                label={"Date & Time: " + time}
+                alt="calendar-icon"
+              />
+            </section>
+          </div>
+          <div className="booking">
+            <aside className="text-lg semi-bold">Book Event</aside>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
