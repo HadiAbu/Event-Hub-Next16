@@ -6,7 +6,6 @@ import BookEvent from "@/app/components/BookEvent";
 import { getSimilarEventsBySlug } from "@/lib/actions/event.actions";
 import EventCard from "@/app/components/EventCard";
 import { capitalize } from "@/lib/utils";
-import { cache } from "react";
 import { cacheLife } from "next/cache";
 
 type RouteParams = {
