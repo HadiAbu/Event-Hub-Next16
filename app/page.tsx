@@ -1,11 +1,15 @@
 import { EventDocument } from "@/database";
 import EventCard from "./components/EventCard";
 import ExploreBtn from "./components/ExploreBtn";
+import { cacheLife } from "next/cache";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 // const INTERNAL_BASE_URL = process.env.INTERNAL_API_BASE_URL;
 
 const Page = async () => {
+  "use cache";
+  cacheLife("hours");
+
   if (!BASE_URL) {
     throw new Error(
       "INTERNAL_BASE_URL is not defined. Set INTERNAL_BASE_URL in your environment."
