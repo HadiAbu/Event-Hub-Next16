@@ -99,7 +99,9 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
   const bookings = 10;
 
   // Similar Events
-  const similarEvents: EventDocument[] = await getSimilarEventsBySlug(slug);
+  const similarEvents: EventDocument[] = (await getSimilarEventsBySlug(
+    slug
+  )) as unknown as EventDocument[];
 
   return (
     <section id="event">

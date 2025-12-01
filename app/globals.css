@@ -262,8 +262,13 @@
       div {
         @apply flex flex-col gap-2;
 
+        /* Added relative positioning to ensure proper stacking context */
+        label {
+          @apply relative z-10 cursor-pointer;
+        }
+
         input {
-          @apply bg-dark-200 rounded-[6px] px-5 py-2.5;
+          @apply bg-dark-200 rounded-[6px] px-5 py-2.5 relative z-20 cursor-text;
         }
       }
 
