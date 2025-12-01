@@ -6,6 +6,8 @@ import BookEvent from "@/app/components/BookEvent";
 import { getSimilarEventsBySlug } from "@/lib/actions/event.actions";
 import EventCard from "@/app/components/EventCard";
 import { capitalize } from "@/lib/utils";
+import { cache } from "react";
+import { cacheLife } from "next/cache";
 
 type RouteParams = {
   params: Promise<{
@@ -54,6 +56,9 @@ const EventDetailsItem = ({
 // another way to type params
 // const EventDetailsPage = async ({params}:{params: Promise<{slug: string}>}) => {
 const EventDetailsPage = async ({ params }: RouteParams) => {
+  "use cache";
+  cacheLife("hours");
+
   const { slug } = await params; // slug must be awaited
 
   let event;
@@ -173,7 +178,7 @@ const EventDetailsPage = async ({ params }: RouteParams) => {
                   Be the first to book your spot
                 </p>
               )}
-              <BookEvent />
+              <BookEvent eventId={event._id} slug={event.slug} />
             </div>
           </aside>
         </div>
