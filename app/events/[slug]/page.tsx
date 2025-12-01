@@ -3,6 +3,9 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { EventDocument } from "@/database";
 import Image from "next/image";
 import BookEvent from "@/app/components/BookEvent";
+import { getSimilarEventsBySlug } from "@/lib/actions/event.actions";
+import EventCard from "@/app/components/EventCard";
+import { capitalize } from "@/lib/utils";
 
 type RouteParams = {
   params: Promise<{
@@ -78,6 +81,7 @@ const EventDetailsPage = async ({ params }: RouteParams) => {
   }
   //descructure event object
   const {
+    title,
     description,
     image,
     overview,
@@ -97,10 +101,15 @@ const EventDetailsPage = async ({ params }: RouteParams) => {
 
   const bookings = 10;
 
+  // Similar Events
+  const similarEvents = (await getSimilarEventsBySlug(
+    slug
+  )) as unknown as EventDocument[];
+
   return (
     <section id="event">
       <div className="header">
-        <h1>{`${slug}`}</h1>
+        <h1>{`${capitalize(title)}`}</h1>
         <p>{` ${description}`}</p>
         <div className="details">
           <div className="content">
@@ -144,11 +153,9 @@ const EventDetailsPage = async ({ params }: RouteParams) => {
               />
             </section>
             {agenda && agenda.length != 0 && (
-              <EventAgenda agendaItems={JSON.parse(agenda[0])} />
+              <EventAgenda agendaItems={agenda} />
             )}
-            {tags && tags.length != 0 && (
-              <EventTags tagItems={JSON.parse(tags[0])} />
-            )}
+            {tags && tags.length != 0 && <EventTags tagItems={tags} />}
             <div className="flex-col-gap-2">
               <h2>Organizer</h2>
               <p>{organizer}</p>
@@ -169,6 +176,16 @@ const EventDetailsPage = async ({ params }: RouteParams) => {
               <BookEvent />
             </div>
           </aside>
+        </div>
+        <div className="flex w-full flex-col gap-4 pt-20">
+          <h2>Similar Events</h2>
+          <div className="events">
+            {similarEvents &&
+              similarEvents.length != 0 &&
+              similarEvents.map((event: EventDocument) => (
+                <EventCard key={event.id} {...event}></EventCard>
+              ))}
+          </div>
         </div>
       </div>
     </section>

@@ -8,7 +8,7 @@ interface EventCardProps {
   description: string;
   location: string;
   slug: string;
-  agenda: string;
+  agenda: string[];
   time: string;
   mode: string;
   venue: string;
@@ -26,31 +26,33 @@ const EventCard = ({
   time,
 }: EventCardProps) => {
   return (
-    <div>
-      <Link href={`/events/${slug}`} id="event-card">
-        <div className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-          <Image
-            src={image}
-            alt={title}
-            width={410}
-            height={300}
-            className="poster"
-          />
-          <h1 className="title ml-2 mt-2">{capitalize(title)}</h1>
-          <div className="flex flex-row gap-2 p-1 ml-2">
-            <Image src="/icons/pin.svg" alt="location" width={14} height={14} />
-            <p>{location}</p>
-          </div>
+    <Link href={`/events/${slug}`} id="event-card">
+      <div className="border rounded-lg overflow-hidden flex-wrap">
+        <Image
+          src={image}
+          alt={title}
+          width={500}
+          height={300}
+          className="poster"
+        />
+        <h1 className="title ml-2 mt-2">{capitalize(title)}</h1>
+        <div className="flex flex-row gap-2 p-1 ml-2">
+          <Image src="/icons/pin.svg" alt="location" width={14} height={14} />
+          <p>{location}</p>
+        </div>
 
-          <div className="datetime mb-2">
-            <div className="ml-2">
+        <div className="">
+          <div className="ml-3">
+            <div className="flex flex-row gap-2">
               <Image
                 src="/icons/calendar.svg"
                 alt="date"
                 width={14}
                 height={14}
               />
-              <p>{formatDate(time)}</p>
+              <p className="self-center">{formatDate(time)}</p>
+            </div>
+            <div className="hidden md:block">
               <p>
                 <span className="font-semibold">Venue:</span>{" "}
                 {capitalize(venue)}
@@ -59,14 +61,14 @@ const EventCard = ({
                 <span className="font-semibold">Mode:</span> {capitalize(mode)}
               </p>
             </div>
-            <div>
-              <Image src="/icons/clock.svg" alt="time" width={14} height={14} />
-              <p>{formatTime(time)}</p>
-            </div>
+          </div>
+          <div className="flex flex-row gap-2 ml-3">
+            <Image src="/icons/clock.svg" alt="time" width={14} height={14} />
+            <p>{formatTime(time)}</p>
           </div>
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 
