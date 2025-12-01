@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import EventDetails from "@/app/components/EventDetails";
 
 // another way to type params
 const EventDetailsPage = async ({
@@ -10,7 +11,6 @@ const EventDetailsPage = async ({
   return (
     <main>
       <Suspense fallback={<div>Loading event details...</div>}>
-        {/* @ts-expect-error Async Server Component */}
         <EventDetails params={slug} />
       </Suspense>
     </main>
