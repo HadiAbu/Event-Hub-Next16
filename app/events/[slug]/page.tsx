@@ -26,16 +26,16 @@ const EventAgenda = ({ agendaItems }: { agendaItems: string[] }) => (
   </div>
 );
 
-const EventTags = ({ tagItems }: { tagItems: string[] }) => (
-  <div className="tags">
-    <h2>Tags</h2>
-    <ul className="">
-      {tagItems.map((item: string) => (
-        <li key={item}>{item}</li>
-      ))}
-    </ul>
+const EventTags = ({ tags }: { tags: string[] }) => (
+  <div className="flex flex-row gap-1.5 flex-wrap">
+    {tags.map((tag) => (
+      <div className="pill" key={tag}>
+        {tag}
+      </div>
+    ))}
   </div>
 );
+
 const EventDetailsItem = ({
   icon,
   label,
@@ -160,7 +160,7 @@ const EventDetailsPage = async ({ params }: RouteParams) => {
             {agenda && agenda.length != 0 && (
               <EventAgenda agendaItems={agenda} />
             )}
-            {tags && tags.length != 0 && <EventTags tagItems={tags} />}
+            {tags && tags.length != 0 && <EventTags tags={tags} />}
             <div className="flex-col-gap-2">
               <h2>Organizer</h2>
               <p>{organizer}</p>
