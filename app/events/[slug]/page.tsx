@@ -183,7 +183,7 @@ const EventDetailsPage = async ({ params }: RouteParams) => {
             {similarEvents &&
               similarEvents.length != 0 &&
               similarEvents.map((event: EventDocument) => (
-                <EventCard key={event._id} {...event}></EventCard>
+                <EventCard key={event.slug} {...event}></EventCard>
               ))}
           </div>
         </div>
