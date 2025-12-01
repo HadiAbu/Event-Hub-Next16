@@ -18,29 +18,29 @@ const Page = async () => {
 
   let events: EventDocument[] = [];
 
-  // try {
-  //   const res = await fetch(`${BASE_URL}/api/events`);
+  try {
+    const res = await fetch(`${BASE_URL}/api/events`);
 
-  //   if (!res.ok) {
-  //     throw new Error(
-  //       `Failed to fetch events: ${res.status} ${res.statusText}`
-  //     );
-  //   }
+    if (!res.ok) {
+      throw new Error(
+        `Failed to fetch events: ${res.status} ${res.statusText}`
+      );
+    }
 
-  //   const payload = await res.json();
+    const payload = await res.json();
 
-  //   if (!payload || !Array.isArray(payload.events)) {
-  //     throw new Error(
-  //       "Invalid response shape from /api/events; expected { events: [] }"
-  //     );
-  //   }
+    if (!payload || !Array.isArray(payload.events)) {
+      throw new Error(
+        "Invalid response shape from /api/events; expected { events: [] }"
+      );
+    }
 
-  //   events = payload.events as EventDocument[];
-  // } catch (err) {
-  //   // Throw so Next.js surfaces the error during SSR; alternative: render fallback UI
-  //   const message = err instanceof Error ? err.message : String(err);
-  //   throw new Error(`Error fetching events: ${message}`);
-  // }
+    events = payload.events as EventDocument[];
+  } catch (err) {
+    // Throw so Next.js surfaces the error during SSR; alternative: render fallback UI
+    const message = err instanceof Error ? err.message : String(err);
+    throw new Error(`Error fetching events: ${message}`);
+  }
 
   return (
     <section>
